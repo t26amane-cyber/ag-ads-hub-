@@ -2,150 +2,793 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
   <title>AG ADS HUB</title>
+
+  <meta name="theme-color" content="#0a0d0b">
+  <meta name="description" content="AG ADS HUB - View Ads • Earn Rewards">
 
   <link rel="stylesheet" href="style.css">
 
+  <!-- Telegram Mini App -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 
 <body>
 
-  <!-- LOADING -->
-  <div id="loadingScreen">
-    <div class="logo-box">
-      <div class="logo-mark">AG</div>
-      <h1>AG ADS HUB</h1>
-      <p>VIEW ADS • EARN REWARDS</p>
-      <div class="loader"></div>
+  <!-- ================= LOADING ================= -->
+  <div id="loadingScreen" class="loading-screen">
+    <div class="loading-logo">
+      AG
+    </div>
+
+    <h1>AG ADS HUB</h1>
+    <p>VIEW ADS • EARN REWARDS</p>
+
+    <div class="loader">
+      <span></span>
     </div>
   </div>
 
-  <!-- APP -->
-  <main id="app">
+
+  <!-- ================= APP ================= -->
+  <main id="app" class="app hidden">
 
     <!-- HEADER -->
     <header class="top-header">
-      <div>
-        <span class="small-text">WELCOME TO</span>
-        <h2>AG ADS HUB</h2>
+
+      <div class="brand">
+        <div class="brand-icon">AG</div>
+
+        <div>
+          <h2>AG ADS HUB</h2>
+          <small>ADS • REWARDS</small>
+        </div>
       </div>
 
-      <div class="status-dot"></div>
+      <button class="profile-mini" onclick="showPage('profile')">
+        <img id="headerPhoto" src="" alt="">
+        <span id="headerInitial">A</span>
+      </button>
+
     </header>
 
-    <!-- BALANCE -->
-    <section class="balance-card">
-      <div>
-        <span>AVAILABLE BALANCE</span>
-        <h1>৳0.00</h1>
+
+    <!-- ================= HOME ================= -->
+    <section id="home" class="page active">
+
+      <div class="welcome-card">
+
+        <div>
+          <span class="small-label">WELCOME</span>
+          <h1 id="welcomeName">User</h1>
+          <p>Watch eligible ads and earn rewards.</p>
+        </div>
+
+        <div class="status-dot"></div>
+
       </div>
 
-      <div class="balance-icon">৳</div>
 
-      <div class="balance-actions">
-        <button>DEPOSIT</button>
-        <button>WITHDRAW</button>
+      <!-- BALANCE -->
+      <div class="balance-card">
+
+        <div class="balance-top">
+          <span>AVAILABLE BALANCE</span>
+          <span class="secure-badge">SECURE</span>
+        </div>
+
+        <div class="balance-amount">
+          ৳<span id="homeBalance">0.00</span>
+        </div>
+
+        <div class="balance-bottom">
+          <span>Pending: ৳<b id="homePending">0.00</b></span>
+          <span>Earned: ৳<b id="homeEarned">0.00</b></span>
+        </div>
+
       </div>
-    </section>
 
-    <!-- VIP -->
-    <section class="vip-card">
-      <div>
-        <span class="vip-label">👑 VIP ACCESS</span>
-        <h3>UNLOCK VIP</h3>
-        <p>Get up to 33 ads per day.</p>
-      </div>
 
-      <button class="vip-button">VIEW PLANS</button>
-    </section>
-
-    <!-- ADS -->
-    <section class="section">
+      <!-- DAILY ADS -->
       <div class="section-title">
-        <h2>AVAILABLE ADS</h2>
-        <span id="adCounter">0 / 15</span>
+        <h3>Today's Ads</h3>
+        <button onclick="showPage('ads')">VIEW ALL</button>
       </div>
 
-      <div id="adsContainer">
+      <div class="daily-card">
 
-        <article class="ad-card">
-          <div class="ad-image">AD</div>
+        <div class="daily-icon">▶</div>
 
-          <div class="ad-info">
-            <span class="ad-tag">ADVERTISEMENT</span>
-            <h3>Advertisement</h3>
-            <p>Complete the required action to become eligible for the reward.</p>
+        <div class="daily-info">
+          <strong id="dailyAdsText">0 / 15</strong>
+          <span>Ads completed today</span>
 
-            <div class="ad-meta">
-              <span>⏱ 15 sec</span>
-              <strong>Reward ৳0.00</strong>
-            </div>
-
-            <button class="watch-button">VIEW AD</button>
+          <div class="progress">
+            <div id="dailyProgress" style="width:0%"></div>
           </div>
-        </article>
+        </div>
+
+        <div id="vipBadge" class="vip-badge hidden">
+          VIP
+        </div>
 
       </div>
+
+
+      <!-- QUICK ACTIONS -->
+      <div class="section-title">
+        <h3>Quick Actions</h3>
+      </div>
+
+      <div class="quick-grid">
+
+        <button onclick="showPage('ads')" class="quick-btn">
+          <span>▶</span>
+          <b>Watch Ads</b>
+          <small>Available ads</small>
+        </button>
+
+        <button onclick="showPage('vip')" class="quick-btn">
+          <span>◆</span>
+          <b>VIP</b>
+          <small>Unlock benefits</small>
+        </button>
+
+        <button onclick="showPage('deposit')" class="quick-btn">
+          <span>＋</span>
+          <b>Deposit</b>
+          <small>Add balance</small>
+        </button>
+
+        <button onclick="showPage('withdraw')" class="quick-btn">
+          <span>↗</span>
+          <b>Withdraw</b>
+          <small>Request payout</small>
+        </button>
+
+      </div>
+
+
+      <!-- INFO -->
+      <div class="info-box">
+        <strong>IMPORTANT</strong>
+        <p>
+          Rewards are only credited after a real eligible ad/task
+          is successfully verified by the server.
+        </p>
+      </div>
+
     </section>
 
-    <!-- QUICK MENU -->
-    <section class="quick-grid">
 
-      <button>
-        <span>💰</span>
-        <b>Balance</b>
-      </button>
+    <!-- ================= ADS ================= -->
+    <section id="ads" class="page">
 
-      <button>
-        <span>👑</span>
-        <b>VIP</b>
-      </button>
+      <div class="page-title">
+        <span>ADS CENTER</span>
+        <h1>Watch Ads</h1>
+        <p>Complete eligible advertisements to earn rewards.</p>
+      </div>
 
-      <button>
-        <span>📜</span>
-        <b>History</b>
-      </button>
+      <div class="limit-card">
 
-      <button>
-        <span>🎧</span>
-        <b>Support</b>
+        <div>
+          <span>TODAY'S LIMIT</span>
+          <strong id="adsLimit">15 Ads</strong>
+        </div>
+
+        <div>
+          <span>COMPLETED</span>
+          <strong id="adsCompleted">0</strong>
+        </div>
+
+      </div>
+
+
+      <div id="adsContainer" class="ads-container">
+
+        <div class="empty-state">
+
+          <div class="empty-icon">▶</div>
+
+          <h3>No live ads available</h3>
+
+          <p>
+            Real advertisements will appear here after
+            the advertising network and backend are connected.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= VIP ================= -->
+    <section id="vip" class="page">
+
+      <div class="page-title">
+
+        <span>PREMIUM ACCESS</span>
+
+        <h1>VIP Membership</h1>
+
+        <p>Unlock a higher daily advertisement limit.</p>
+
+      </div>
+
+
+      <div class="vip-current">
+
+        <div>
+          <span>YOUR STATUS</span>
+          <strong id="vipStatus">NORMAL</strong>
+        </div>
+
+        <div>
+          <span>EXPIRES</span>
+          <strong id="vipExpiry">—</strong>
+        </div>
+
+      </div>
+
+
+      <div class="vip-plans">
+
+        <div class="vip-plan">
+
+          <span class="plan-tag">1 DAY</span>
+
+          <h2>৳3</h2>
+
+          <p>33 ads / day</p>
+
+          <button onclick="openVipPayment(1,3)">
+            UNLOCK VIP
+          </button>
+
+        </div>
+
+
+        <div class="vip-plan featured">
+
+          <div class="popular">POPULAR</div>
+
+          <span class="plan-tag">7 DAYS</span>
+
+          <h2>৳20</h2>
+
+          <p>33 ads / day</p>
+
+          <button onclick="openVipPayment(7,20)">
+            UNLOCK VIP
+          </button>
+
+        </div>
+
+
+        <div class="vip-plan">
+
+          <span class="plan-tag">30 DAYS</span>
+
+          <h2>৳90</h2>
+
+          <p>33 ads / day</p>
+
+          <button onclick="openVipPayment(30,90)">
+            UNLOCK VIP
+          </button>
+
+        </div>
+
+
+        <div class="vip-plan">
+
+          <span class="plan-tag">90 DAYS</span>
+
+          <h2>৳240</h2>
+
+          <p>33 ads / day</p>
+
+          <button onclick="openVipPayment(90,240)">
+            UNLOCK VIP
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="info-box">
+        <strong>VIP ACTIVATION</strong>
+
+        <p>
+          Payment must be verified by the administrator/backend.
+          VIP is activated only after successful verification.
+        </p>
+      </div>
+
+    </section>
+
+
+    <!-- ================= BALANCE ================= -->
+    <section id="balance" class="page">
+
+      <div class="page-title">
+        <span>ACCOUNT</span>
+        <h1>Balance</h1>
+      </div>
+
+
+      <div class="big-balance">
+        <span>AVAILABLE BALANCE</span>
+        <strong>৳<b id="balancePage">0.00</b></strong>
+      </div>
+
+
+      <div class="stats-grid">
+
+        <div class="stat-box">
+          <span>PENDING</span>
+          <strong>৳<b id="balancePending">0.00</b></strong>
+        </div>
+
+        <div class="stat-box">
+          <span>TOTAL EARNED</span>
+          <strong>৳<b id="balanceEarned">0.00</b></strong>
+        </div>
+
+        <div class="stat-box">
+          <span>WITHDRAWN</span>
+          <strong>৳<b id="balanceWithdrawn">0.00</b></strong>
+        </div>
+
+        <div class="stat-box">
+          <span>TODAY ADS</span>
+          <strong id="balanceAds">0</strong>
+        </div>
+
+      </div>
+
+
+      <button class="main-btn" onclick="showPage('withdraw')">
+        WITHDRAW
       </button>
 
     </section>
+
+
+    <!-- ================= DEPOSIT ================= -->
+    <section id="deposit" class="page">
+
+      <div class="page-title">
+        <span>ACCOUNT FUNDING</span>
+        <h1>Deposit</h1>
+        <p>Submit a real payment for manual verification.</p>
+      </div>
+
+
+      <div class="payment-methods">
+
+        <div class="payment-card">
+
+          <div class="payment-head">
+            <strong>bKash</strong>
+            <span>PERSONAL / MERCHANT</span>
+          </div>
+
+          <div class="payment-number">
+
+            <span id="bkashNumber">Not configured</span>
+
+            <button onclick="copyConfig('BKASH_NUMBER')">
+              COPY
+            </button>
+
+          </div>
+
+          <img id="bkashQR" class="payment-qr hidden" alt="bKash QR">
+
+        </div>
+
+
+        <div class="payment-card">
+
+          <div class="payment-head">
+            <strong>Nagad</strong>
+            <span>PERSONAL / MERCHANT</span>
+          </div>
+
+          <div class="payment-number">
+
+            <span id="nagadNumber">Not configured</span>
+
+            <button onclick="copyConfig('NAGAD_NUMBER')">
+              COPY
+            </button>
+
+          </div>
+
+          <img id="nagadQR" class="payment-qr hidden" alt="Nagad QR">
+
+        </div>
+
+      </div>
+
+
+      <div class="form-card">
+
+        <label>Deposit Amount</label>
+
+        <input
+          id="depositAmount"
+          type="number"
+          min="1"
+          placeholder="Enter amount"
+        >
+
+
+        <label>Payment Method</label>
+
+        <select id="depositMethod">
+
+          <option value="bkash">bKash</option>
+          <option value="nagad">Nagad</option>
+
+        </select>
+
+
+        <label>Transaction ID</label>
+
+        <input
+          id="depositTxid"
+          type="text"
+          placeholder="Enter transaction ID"
+          autocomplete="off"
+        >
+
+
+        <button class="main-btn" onclick="submitDeposit()">
+          SUBMIT PAYMENT
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= WITHDRAW ================= -->
+    <section id="withdraw" class="page">
+
+      <div class="page-title">
+
+        <span>PAYOUT</span>
+
+        <h1>Withdraw</h1>
+
+        <p>Your withdrawal request will be reviewed by the system.</p>
+
+      </div>
+
+
+      <div class="withdraw-balance">
+
+        <span>AVAILABLE</span>
+
+        <strong>৳<b id="withdrawBalance">0.00</b></strong>
+
+      </div>
+
+
+      <div class="form-card">
+
+        <label>Withdrawal Amount</label>
+
+        <input
+          id="withdrawAmount"
+          type="number"
+          min="1"
+          placeholder="Enter amount"
+        >
+
+
+        <label>Payment Method</label>
+
+        <select id="withdrawMethod">
+
+          <option value="bkash">bKash</option>
+          <option value="nagad">Nagad</option>
+
+        </select>
+
+
+        <label>Account Number</label>
+
+        <input
+          id="withdrawNumber"
+          type="tel"
+          placeholder="01XXXXXXXXX"
+        >
+
+
+        <button class="main-btn" onclick="submitWithdraw()">
+          REQUEST WITHDRAWAL
+        </button>
+
+      </div>
+
+
+      <div class="warning-box">
+        <strong>NO FAKE SUCCESS</strong>
+
+        <p>
+          This button does not create a fake successful withdrawal.
+          A real backend must approve and process the request.
+        </p>
+      </div>
+
+    </section>
+
+
+    <!-- ================= HISTORY ================= -->
+    <section id="history" class="page">
+
+      <div class="page-title">
+
+        <span>ACCOUNT ACTIVITY</span>
+
+        <h1>History</h1>
+
+      </div>
+
+
+      <div id="historyContainer">
+
+        <div class="empty-state">
+
+          <div class="empty-icon">≡</div>
+
+          <h3>No transactions yet</h3>
+
+          <p>
+            Real deposits, rewards and withdrawals
+            will appear here.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= PROFILE ================= -->
+    <section id="profile" class="page">
+
+      <div class="profile-card">
+
+        <div class="profile-avatar">
+
+          <img id="profilePhoto" src="" alt="">
+
+          <span id="profileInitial">A</span>
+
+        </div>
+
+
+        <h1 id="profileName">Telegram User</h1>
+
+        <p id="profileUsername">@username</p>
+
+        <span id="profileStatus" class="active-status">
+          ACTIVE
+        </span>
+
+      </div>
+
+
+      <div class="profile-info">
+
+        <div>
+          <span>TELEGRAM ID</span>
+          <strong id="telegramId">—</strong>
+        </div>
+
+        <div>
+          <span>USERNAME</span>
+          <strong id="telegramUsername">—</strong>
+        </div>
+
+        <div>
+          <span>VIP STATUS</span>
+          <strong id="profileVip">NORMAL</strong>
+        </div>
+
+        <div>
+          <span>VIP EXPIRY</span>
+          <strong id="profileVipExpiry">—</strong>
+        </div>
+
+      </div>
+
+
+      <div class="profile-actions">
+
+        <button onclick="showPage('referral')">
+          REFERRAL
+        </button>
+
+        <button onclick="openSupport()">
+          SUPPORT
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= REFERRAL ================= -->
+    <section id="referral" class="page">
+
+      <div class="page-title">
+
+        <span>INVITE & EARN</span>
+
+        <h1>Referral</h1>
+
+        <p>Share your referral link with eligible users.</p>
+
+      </div>
+
+
+      <div class="referral-card">
+
+        <div class="referral-icon">↗</div>
+
+        <h2>YOUR REFERRAL LINK</h2>
+
+        <div class="referral-link">
+
+          <input id="referralLink" readonly value="Not configured">
+
+          <button onclick="copyReferral()">COPY</button>
+
+        </div>
+
+        <button class="main-btn" onclick="shareReferral()">
+          SHARE LINK
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= BOTTOM NAV ================= -->
+    <nav class="bottom-nav">
+
+      <button onclick="showPage('home')" data-page="home">
+        <span>⌂</span>
+        <small>Home</small>
+      </button>
+
+      <button onclick="showPage('ads')" data-page="ads">
+        <span>▶</span>
+        <small>Ads</small>
+      </button>
+
+      <button onclick="showPage('balance')" data-page="balance">
+        <span>৳</span>
+        <small>Balance</small>
+      </button>
+
+      <button onclick="showPage('withdraw')" data-page="withdraw">
+        <span>↗</span>
+        <small>Withdraw</small>
+      </button>
+
+      <button onclick="showPage('profile')" data-page="profile">
+        <span>●</span>
+        <small>Profile</small>
+      </button>
+
+    </nav>
 
   </main>
 
-  <!-- BOTTOM NAV -->
-  <nav class="bottom-nav">
 
-    <button class="nav-item active">
-      <span>⌂</span>
-      <small>Home</small>
-    </button>
+  <!-- ================= VIP PAYMENT MODAL ================= -->
+  <div id="vipModal" class="modal hidden">
 
-    <button class="nav-item">
-      <span>▶</span>
-      <small>Ads</small>
-    </button>
+    <div class="modal-box">
 
-    <button class="nav-item">
-      <span>৳</span>
-      <small>Balance</small>
-    </button>
+      <button class="modal-close" onclick="closeModal()">
+        ×
+      </button>
 
-    <button class="nav-item">
-      <span>⇩</span>
-      <small>Withdraw</small>
-    </button>
+      <span class="modal-label">VIP PURCHASE</span>
 
-    <button class="nav-item">
-      <span>●</span>
-      <small>Profile</small>
-    </button>
+      <h2 id="selectedPlan">7 DAYS VIP</h2>
 
-  </nav>
+      <div class="modal-price">
+        ৳<b id="selectedPrice">20</b>
+      </div>
+
+
+      <div class="payment-card">
+
+        <strong>bKash</strong>
+
+        <div class="payment-number">
+
+          <span id="vipBkashNumber">Not configured</span>
+
+          <button onclick="copyConfig('BKASH_NUMBER')">
+            COPY
+          </button>
+
+        </div>
+
+        <img id="vipBkashQR" class="payment-qr hidden" alt="QR">
+
+      </div>
+
+
+      <div class="payment-card">
+
+        <strong>Nagad</strong>
+
+        <div class="payment-number">
+
+          <span id="vipNagadNumber">Not configured</span>
+
+          <button onclick="copyConfig('NAGAD_NUMBER')">
+            COPY
+          </button>
+
+        </div>
+
+        <img id="vipNagadQR" class="payment-qr hidden" alt="QR">
+
+      </div>
+
+
+      <label>Payment Method</label>
+
+      <select id="vipMethod">
+
+        <option value="bkash">bKash</option>
+        <option value="nagad">Nagad</option>
+
+      </select>
+
+
+      <label>Transaction ID</label>
+
+      <input
+        id="vipTxid"
+        type="text"
+        placeholder="Enter transaction ID"
+      >
+
+
+      <button class="main-btn" onclick="submitVipPayment()">
+        SUBMIT PAYMENT
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- ================= NOTIFICATION ================= -->
+  <div id="toast" class="toast">
+    <span id="toastText"></span>
+  </div>
+
 
   <script src="script.js"></script>
 
