@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AG ADS HUB</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+
+<body>
+
+  <!-- LOADING -->
+  <div id="loadingScreen">
+    <div class="logo-box">
+      <div class="logo-mark">AG</div>
+      <h1>AG ADS HUB</h1>
+      <p>VIEW ADS • EARN REWARDS</p>
+      <div class="loader"></div>
+    </div>
+  </div>
+
+  <!-- APP -->
+  <main id="app">
+
+    <!-- HEADER -->
+    <header class="top-header">
+      <div>
+        <span class="small-text">WELCOME TO</span>
+        <h2>AG ADS HUB</h2>
+      </div>
+
+      <div class="status-dot"></div>
+    </header>
+
+    <!-- BALANCE -->
+    <section class="balance-card">
+      <div>
+        <span>AVAILABLE BALANCE</span>
+        <h1>৳0.00</h1>
+      </div>
+
+      <div class="balance-icon">৳</div>
+
+      <div class="balance-actions">
+        <button>DEPOSIT</button>
+        <button>WITHDRAW</button>
+      </div>
+    </section>
+
+    <!-- VIP -->
+    <section class="vip-card">
+      <div>
+        <span class="vip-label">👑 VIP ACCESS</span>
+        <h3>UNLOCK VIP</h3>
+        <p>Get up to 33 ads per day.</p>
+      </div>
+
+      <button class="vip-button">VIEW PLANS</button>
+    </section>
+
+    <!-- ADS -->
+    <section class="section">
+      <div class="section-title">
+        <h2>AVAILABLE ADS</h2>
+        <span id="adCounter">0 / 15</span>
+      </div>
+
+      <div id="adsContainer">
+
+        <article class="ad-card">
+          <div class="ad-image">AD</div>
+
+          <div class="ad-info">
+            <span class="ad-tag">ADVERTISEMENT</span>
+            <h3>Advertisement</h3>
+            <p>Complete the required action to become eligible for the reward.</p>
+
+            <div class="ad-meta">
+              <span>⏱ 15 sec</span>
+              <strong>Reward ৳0.00</strong>
+            </div>
+
+            <button class="watch-button">VIEW AD</button>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- QUICK MENU -->
+    <section class="quick-grid">
+
+      <button>
+        <span>💰</span>
+        <b>Balance</b>
+      </button>
+
+      <button>
+        <span>👑</span>
+        <b>VIP</b>
+      </button>
+
+      <button>
+        <span>📜</span>
+        <b>History</b>
+      </button>
+
+      <button>
+        <span>🎧</span>
+        <b>Support</b>
+      </button>
+
+    </section>
+
+  </main>
+
+  <!-- BOTTOM NAV -->
+  <nav class="bottom-nav">
+
+    <button class="nav-item active">
+      <span>⌂</span>
+      <small>Home</small>
+    </button>
+
+    <button class="nav-item">
+      <span>▶</span>
+      <small>Ads</small>
+    </button>
+
+    <button class="nav-item">
+      <span>৳</span>
+      <small>Balance</small>
+    </button>
+
+    <button class="nav-item">
+      <span>⇩</span>
+      <small>Withdraw</small>
+    </button>
+
+    <button class="nav-item">
+      <span>●</span>
+      <small>Profile</small>
+    </button>
+
+  </nav>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
